@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .perspective-900 {
+    perspective: 900px;
+  }
+}
+
+/* 3D orbital animations */
+@keyframes orbit-slow {
+  0% {
+    transform: rotateX(68deg) rotateY(14deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(68deg) rotateY(14deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orbit-reverse {
+  0% {
+    transform: rotateX(-55deg) rotateY(32deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotateX(-55deg) rotateY(32deg) rotateZ(0deg);
+  }
+}
+
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0px) translateZ(16px);
+  }
+  50% {
+    transform: translateY(-6px) translateZ(26px);
+  }
+}
+
+.animate-orbit-slow {
+  animation: orbit-slow 9s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-reverse 12s linear infinite;
+}
+
+.animate-float-3d {
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-slow,
+  .animate-orbit-reverse,
+  .animate-float-3d {
+    animation: none !important;
+  }
+}
+
+/* Clean custom scrollbars */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.28);
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
